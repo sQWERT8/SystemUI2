@@ -2,39 +2,18 @@ LOCAL_PATH:= $(call my-dir)
 
 include $(CLEAR_VARS)
 
-LOCAL_MODULE := SystemUI-proto
-
-LOCAL_SRC_FILES := $(call all-proto-files-under,src)
-
-LOCAL_PROTOC_OPTIMIZE_TYPE := nano
-LOCAL_PROTO_JAVA_OUTPUT_PARAMS := optional_field_style=accessors
-
-include $(BUILD_STATIC_JAVA_LIBRARY)
-
-include $(CLEAR_VARS)
-
-LOCAL_MODULE := SystemUI-tags
-
-LOCAL_SRC_FILES := src/com/android/systemui/EventLogTags.logtags
-
-include $(BUILD_STATIC_JAVA_LIBRARY)
-
-# ------------------
-
-include $(CLEAR_VARS)
-
 LOCAL_USE_AAPT2 := true
 
 LOCAL_MODULE_TAGS := optional
 
-RELATIVE_FINGERPRINT_PATH := ../../core/java/android/hardware/fingerprint
+RELATIVE_FINGERPRINT_PATH := ../../../frameworks/base/core/java/android/hardware/fingerprint
 
 LOCAL_SRC_FILES := \
     $(call all-java-files-under, src) \
     $(call all-Iaidl-files-under, src) \
     $(call all-Iaidl-files-under, $(RELATIVE_FINGERPRINT_PATH))
 
-LOCAL_SRC_FILES += $(call all-java-files-under, ../../../../packages/apps/DUI/src)
+LOCAL_SRC_FILES += $(call all-java-files-under, ../DUI/src)
 
 LOCAL_STATIC_ANDROID_LIBRARIES := \
     SystemUIPluginLib \
@@ -65,10 +44,11 @@ LOCAL_STATIC_JAVA_LIBRARIES := \
 LOCAL_JAVA_LIBRARIES := telephony-common \
     android.car
 
-LOCAL_PACKAGE_NAME := SystemUI
+LOCAL_PACKAGE_NAME := SystemUI2
 LOCAL_PRIVATE_PLATFORM_APIS := true
 LOCAL_CERTIFICATE := platform
 LOCAL_PRIVILEGED_MODULE := true
+LOCAL_OVERRIDES_PACKAGES := SystemUI
 
 LOCAL_FULL_LIBS_MANIFEST_FILES := $(LOCAL_PATH)/LineageManifest.xml
 
